@@ -47,41 +47,41 @@ For 3.3V: R1 = 240Ω, R2 = 390Ω
 ## What I Learned
 
 **LTspice simulation workflow:**
-Simulated the full circuit before building, which caught a wiring 
-error in the LM317T feedback network. The ADJ pin was incorrectly 
-connected — simulation made this visible before any hardware was 
-damaged.
+- Simulated the full circuit before building, which caught a wiring 
+  error in the LM317T feedback network. The ADJ pin was incorrectly 
+  connected — simulation made this visible before any hardware was 
+  damaged.
 
 **LED SPICE modeling:**
-Discovered that LTspice's generic diode model uses ~0.75V forward 
-voltage, which does not represent a real LED. Replaced the diode 
-model with a behavioral voltage source set to the LED's actual 
-forward voltage (3.2V) to get accurate current calculations.
+- Discovered that LTspice's generic diode model uses ~0.75V forward 
+  voltage, which does not represent a real LED. Replaced the diode 
+  model with a behavioral voltage source set to the LED's actual 
+  forward voltage (3.2V) to get accurate current calculations.
 
 **LM317T regulation mechanism:**
-Learned that the LM317T does not regulate to ground — it maintains 
-exactly 1.25V between its OUTPUT and ADJ pins. The output voltage 
-is set by a resistor divider, and I derived the formula from first 
-principles using Ohm's law and KVL rather than just applying it.
+- Learned that the LM317T does not regulate to ground — it maintains 
+  exactly 1.25V between its OUTPUT and ADJ pins. The output voltage 
+  is set by a resistor divider, and I derived the formula from first 
+  principles using Ohm's law and KVL rather than just applying it.
 
 **Capacitor selection reasoning:**
-Learned to select capacitor values based on their specific job — 
-bulk storage electrolytics sized by C = I×Δt/ΔV, and 100nF ceramics 
-for high frequency bypassing on every IC power pin. Also learned 
-why electrolytics cannot be used in AC signal paths but are valid 
-on DC power rails where polarity never reverses.
+- Learned to select capacitor values based on their specific job — 
+  bulk storage electrolytics sized by C = I×Δt/ΔV, and 100nF ceramics 
+  for high frequency bypassing on every IC power pin. Also learned 
+  why electrolytics cannot be used in AC signal paths but are valid 
+  on DC power rails where polarity never reverses.
 
 **Debugging real hardware:**
-Built the circuit on a breadboard and measured only 1.4V output 
-from the LM317T. Diagnosed the cause by measuring each pin 
-individually with a multimeter and checking the resistor divider 
-connections. This matched the simulation debugging process.
+- Built the circuit on a breadboard and measured only 1.4V output 
+  from the LM317T. Diagnosed the cause by measuring each pin 
+  individually with a multimeter and checking the resistor divider 
+  connections. This matched the simulation debugging process.
 
 **Power dissipation:**
-Calculated and observed heat dissipation in both the load resistors 
-and the L7805 regulator. Learned to apply P = V²/R and 
-P = (Vin-Vout) × I to predict thermal behavior before touching 
-components.
+- Calculated and observed heat dissipation in both the load resistors 
+  and the L7805 regulator. Learned to apply P = V²/R and 
+  P = (Vin-Vout) × I to predict thermal behavior before touching 
+  components.
 
 ## Future Improvements
 - Design a PCB in KiCad with ground plane and proper component placement
