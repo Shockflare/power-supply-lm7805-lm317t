@@ -39,6 +39,8 @@ For 3.3V: R1 = 240Ω, R2 = 390Ω
   expected order — correcting this resolved incorrect output voltage.
 - LM317T adjustment voltage divide incorrectly connect to board output
   and adjudment input of the LM317T in LTSpice simulation.
+- Ignored drop out voltage on LM317T. LM317T required 3 V of input-to-output
+  voltage drop.
 
 ## Results
 - Measured 5V output: 5.02 V
@@ -84,6 +86,7 @@ For 3.3V: R1 = 240Ω, R2 = 390Ω
   components.
 
 ## Future Improvements
+- Redesign for parallel regulators instead of regulators in series
 - Design a PCB in KiCad with ground plane and proper component placement
 - Replace linear regulators with a buck converter to reduce heat dissipation
   at high load currents (L7805 dissipates 1.76W at 250mA load)
